@@ -1,0 +1,12 @@
+require './middleware'
+
+class HelloWorldApp
+  def self.call(env)
+    request = Rack::Request.new env
+    name = request.params['name']
+    [200, {}, ['hello ' + name]]
+  end
+end
+
+use Middleware
+run HelloWorldApp
